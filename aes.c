@@ -34,6 +34,7 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
 /* Includes:                                                                 */
 /*****************************************************************************/
 #include <stdint.h>
+#include <limits.h>
 #include <string.h> // CBC mode, for memset
 #include "aes.h"
 
@@ -57,6 +58,13 @@ NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
   #define MULTIPLY_AS_A_FUNCTION 0
 #endif
 
+// Some C compiler does not defined the uintptr_t (example the Microchip XC16).
+// With this definition fix this error.
+#ifndef uintptr_t
+typedef unsigned int uintptr_t;
+#define uintptr_t uintptr_t
+#define UINTPTR_MAX UINT_MAX
+#endif
 
 /*****************************************************************************/
 /* Private variables:                                                        */
